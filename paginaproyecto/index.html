@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ServiExpress Maicao S.A.S. | Reparación y mantenimiento tecnológico</title>
+<meta name="description" content="Diagnóstico, mantenimiento y reparación de computadores y celulares en Maicao, La Guajira.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#inicio">ServiExpress <span>Maicao</span></a>
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  <nav id="nav">
+    <a href="#servicios">Servicios</a>
+    <a href="#sistema">Seguimiento</a>
+    <a href="#objetivos">Objetivos</a>
+    <a href="#empresa">Misión y visión</a>
+    <a href="#normas">Normas</a>
+    <a href="#visitanos">Ubicación</a>
+    <a href="#creadores">Creadores</a>
+  </nav>
+</header>
+
+<!-- HERO: imagen de la Universidad de La Guajira -->
+<section class="hero photo" id="inicio" data-photo="uni" data-default="img/universidad-guajira.jpg">
+  <div class="hero-in">
+    <h1>Tu equipo en buenas manos, y siempre sabes cómo va.</h1>
+    <p>Diagnóstico, mantenimiento y reparación de computadores, celulares y otros dispositivos en Maicao, La Guajira.</p>
+    <div class="btns">
+      <a class="btn" href="#sistema">Consultar mi reparación</a>
+      <a class="btn ghost" href="#servicios">Ver servicios</a>
+    </div>
+  </div>
+</section>
+
+<main>
+<section id="servicios" class="wrap">
+  <h2>Qué hacemos</h2>
+  <p class="lead">ServiExpress Maicao S.A.S. atiende a personas, estudiantes, pequeños negocios e instituciones que necesitan soporte técnico para sus equipos.</p>
+  <div class="grid3">
+    <article class="card"><h3>Diagnóstico</h3><p>Revisamos el equipo, identificamos la falla y te explicamos el problema antes de reparar.</p></article>
+    <article class="card"><h3>Mantenimiento</h3><p>Limpieza, actualización y revisión preventiva para que tu computador o celular rinda como el primer día.</p></article>
+    <article class="card"><h3>Reparación</h3><p>Pantallas, baterías, software, puertos de carga y otras fallas de computadores y teléfonos.</p></article>
+  </div>
+  <h3 class="sub">Datos de la empresa</h3>
+  <div class="tablebox"><table>
+    <tr><th>Nombre</th><td>ServiExpress Maicao S.A.S.</td></tr>
+    <tr><th>Sector</th><td>Servicios tecnológicos</td></tr>
+    <tr><th>Ubicación</th><td>Maicao, La Guajira</td></tr>
+    <tr><th>Clientes</th><td>Personas, estudiantes, pequeños negocios e instituciones</td></tr>
+    <tr><th>Servicios</th><td>Diagnóstico, mantenimiento y reparación de equipos</td></tr>
+  </table></div>
+</section>
+
+<section class="wrap dark-sec" id="problema">
+  <div class="split">
+    <div>
+      <h2>El problema que resolvemos</h2>
+      <p>El registro de reparaciones se llevaba a mano. Los datos de clientes, equipos y diagnósticos quedaban dispersos, y responder "¿cómo va mi equipo?" tomaba tiempo.</p>
+    </div>
+    <div>
+      <h2>La solución</h2>
+      <p>Un prototipo web, ordenado y adaptable a celulares, que registra clientes y equipos, crea solicitudes y muestra el estado de cada reparación. Funciona con HTML, CSS y JavaScript, y guarda los datos en el navegador (LocalStorage), sin servidores.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SISTEMA FUNCIONAL -->
+<section id="sistema" class="wrap">
+  <h2>Seguimiento de servicios</h2>
+  <p class="lead">Ingresa según tu perfil: los clientes consultan el estado de su equipo y los trabajadores gestionan las reparaciones.</p>
+
+  <div id="login" class="panel login">
+    <div class="tabs">
+      <button type="button" class="tab on" data-rol="cliente">Soy cliente</button>
+      <button type="button" class="tab" data-rol="trabajador">Soy trabajador</button>
+    </div>
+    <form id="loginForm" novalidate>
+      <label><span id="luser">Teléfono registrado</span><input id="user" autocomplete="off"></label>
+      <label><span id="lpass">Contraseña (código del servicio, ej. SE-001)</span><input id="pass" type="password" autocomplete="off"></label>
+      <p class="err" id="lerr" role="alert"></p>
+      <button class="btn" type="submit">Ingresar</button>
+    </form>
+  </div>
+
+  <div id="panelApp" hidden>
+    <div class="sesion"><span id="quien"></span><button class="btn out" id="salir" type="button">Cerrar sesión</button></div>
+
+    <!-- Vista del cliente: solo lectura -->
+    <div id="vistaCli" hidden>
+      <h3 class="sub">Estado de tus equipos</h3>
+      <div class="cards" id="miLista"></div>
+    </div>
+
+    <!-- Vista del trabajador: gestión completa -->
+    <div id="vistaTrab" hidden>
+      <div class="stats" id="stats"></div>
+      <form id="form" class="panel" novalidate>
+        <h3>Nueva solicitud</h3>
+        <div class="two">
+          <label>Nombre del cliente<input name="cliente" maxlength="60" autocomplete="off"></label>
+          <label>Teléfono de contacto<input name="telefono" inputmode="tel" maxlength="20" autocomplete="off"></label>
+          <label>Tipo de equipo
+            <select name="tipo"><option>Celular</option><option>Computador</option><option>Tablet</option><option>Otro dispositivo</option></select>
+          </label>
+          <label>Marca y modelo<input name="equipo" maxlength="60" autocomplete="off"></label>
+        </div>
+        <label>Falla reportada<textarea name="falla" rows="3" maxlength="200"></textarea></label>
+        <p class="err" id="err" role="alert"></p>
+        <button class="btn" type="submit">Registrar solicitud</button>
+        <div id="resultado" class="resultado" aria-live="polite"></div>
+      </form>
+
+      <div class="bar">
+        <h3>Servicios registrados</h3>
+        <input id="buscar" type="search" placeholder="Buscar por cliente, equipo o código" aria-label="Buscar servicios">
+        <select id="filtro" aria-label="Filtrar por estado">
+          <option value="">Todos los estados</option><option>Recibido</option><option>En reparación</option><option>Listo para entregar</option>
+        </select>
+      </div>
+      <div class="cards" id="lista"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BANDA: imagen del centro de Maicao -->
+<section class="band photo" id="ubicacion" data-photo="centro" data-default="img/centro-maicao.jpg">
+  <div class="band-in">
+    <h2>Nacimos en el corazón de Maicao</h2>
+    <p>Trabajamos en el centro de la ciudad, donde se concentra la reparación de teléfonos y equipos tecnológicos de La Guajira.</p>
+  </div>
+</section>
+
+<section id="objetivos" class="wrap">
+  <h2>Objetivos del proyecto</h2>
+  <div class="split">
+    <div class="panel"><h3>Objetivo general</h3><p>Desarrollar un prototipo de sistema web que permita organizar y facilitar el seguimiento de los servicios técnicos realizados por ServiExpress Maicao S.A.S., mejorando la consulta y presentación de la información.</p></div>
+    <div class="panel"><h3>Objetivos específicos</h3><ul>
+      <li>Diseñar una interfaz web sencilla y fácil de utilizar.</li>
+      <li>Representar digitalmente el proceso de recepción y reparación de equipos.</li>
+      <li>Permitir el registro y consulta de clientes, equipos y solicitudes.</li>
+      <li>Implementar un sistema visual para identificar el estado de cada servicio.</li>
+      <li>Usar JavaScript y almacenamiento local para una demostración funcional sin servidor.</li>
+    </ul></div>
+  </div>
+
+  <h3 class="sub">Tecnologías</h3>
+  <div class="chips"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>LocalStorage</span><span>Visual Studio Code</span></div>
+
+  <h3 class="sub">Beneficios esperados</h3>
+  <div class="grid3">
+    <article class="card"><h3>Información ordenada</h3><p>Clientes, equipos y solicitudes en un solo lugar.</p></article>
+    <article class="card"><h3>Consulta rápida</h3><p>El estado de cada reparación se encuentra en segundos.</p></article>
+    <article class="card"><h3>Atención más clara</h3><p>Una experiencia sencilla para quien atiende al cliente.</p></article>
+  </div>
+  <p class="note">Alcance: esta primera etapa es un prototipo académico a nivel de interfaz. A futuro podría conectarse a una base de datos y servidor para acceder desde varios dispositivos, con cuentas de usuario, respaldos y notificaciones automáticas.</p>
+</section>
+
+<section id="empresa" class="wrap dark-sec">
+  <h2>Misión y visión</h2>
+  <div class="split">
+    <div class="mv"><h3>Misión</h3><p>Brindar servicios de diagnóstico, mantenimiento y reparación de equipos tecnológicos con honestidad, rapidez y calidad, manteniendo informado al cliente en cada etapa del proceso.</p></div>
+    <div class="mv"><h3>Visión</h3><p>Ser, en los próximos años, la empresa de servicio técnico más confiable de Maicao y La Guajira, reconocida por su atención transparente y por el uso de tecnología para organizar su trabajo.</p></div>
+  </div>
+</section>
+
+<section id="normas" class="wrap">
+  <h2>Normas de la empresa</h2>
+  <div class="grid3">
+    <article class="card"><h3>Honestidad en el diagnóstico</h3><p>Informamos la falla real y el costo estimado antes de iniciar cualquier reparación.</p></article>
+    <article class="card"><h3>Confidencialidad</h3><p>La información personal y el contenido de los equipos se tratan con total reserva.</p></article>
+    <article class="card"><h3>Cumplimiento de tiempos</h3><p>Entregamos en la fecha acordada y avisamos de cualquier cambio.</p></article>
+    <article class="card"><h3>Garantía del servicio</h3><p>Cada reparación incluye garantía sobre el trabajo y los repuestos instalados.</p></article>
+    <article class="card"><h3>Repuestos de calidad</h3><p>Usamos repuestos probados y le indicamos al cliente su procedencia.</p></article>
+    <article class="card"><h3>Respeto y buen trato</h3><p>Atendemos a cada persona con amabilidad, sin importar el equipo ni el tipo de falla.</p></article>
+  </div>
+</section>
+
+<section id="visitanos" class="wrap">
+  <h2>Visítanos</h2>
+  <p class="lead">Estamos en el centro de Maicao, cerca de donde se concentra la reparación de teléfonos y equipos.</p>
+  <div class="visit">
+    <div class="card info">
+      <h3>Dirección</h3>
+      <p>Centro de Maicao, La Guajira</p>
+      <h3>Horario de atención</h3>
+      <ul class="horario">
+        <li><span>Lunes a viernes</span><span>8:00 a. m. - 6:00 p. m.</span></li>
+        <li><span>Sábados</span><span>8:00 a. m. - 2:00 p. m.</span></li>
+        <li><span>Domingos y festivos</span><span>Cerrado</span></li>
+      </ul>
+      <h3>Qué traer</h3>
+      <p>Tu equipo, el cargador si lo tienes y un documento de identidad. Te entregamos un código para consultar el estado en esta página.</p>
+    </div>
+    <div class="mapa">
+      <iframe title="Mapa de Maicao, La Guajira" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Maicao,+La+Guajira,+Colombia&amp;output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="creadores" class="wrap">
+  <h2>Creadores de la página</h2>
+  <p class="lead">Estudiantes de Ingeniería de Sistemas que desarrollaron este prototipo.</p>
+  <div class="grid3 team">
+    <article class="card person"><div class="av">LM</div><h3>Luis Méndez</h3></article>
+    <article class="card person"><div class="av">AR</div><h3>Alizon Rimon</h3></article>
+    <article class="card person"><div class="av">WP</div><h3>Wilmer Pinto</h3></article>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p><strong>ServiExpress Maicao S.A.S.</strong> · Maicao, La Guajira</p>
+  <p>Prototipo académico desarrollado por Luis Méndez, Alizon Rimon y Wilmer Pinto.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
